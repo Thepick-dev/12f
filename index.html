@@ -1,69 +1,97 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LMS XII - Home</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=League+Gothic&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --bg:#ffffff; --text:#000; --muted:#111;
-  --neon-home:#ff007f; --neon-predict:#ff8a2b; --neon-rules:#00c2b8; --neon-table:#9b00ff;
-  --title-size:clamp(96px,10vw,140px);
-  --tagline-size:clamp(20px,3.6vw,32px);
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --accent-orange: #ff8a2b;
+  --accent-teal: #00f2f2;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:"League Gothic",Arial,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-.container{max-width:1120px;margin:0 auto;padding:18px}
-.header{display:flex;flex-direction:column;align-items:center}
-.title{font-family:"Bebas Neue",sans-serif;font-size:var(--title-size);margin:20px 0;padding:14px;border-radius:8px;border:2px solid;border-image: linear-gradient(90deg,#ff007f,#00f2ff,#ffd400) 1;}
-.tagline{font-size:var(--tagline-size);font-weight:700;margin-bottom:16px;color:var(--neon-home)}
-.nav{display:flex;gap:18px;justify-content:center;position:relative;padding:6px 0}
-.nav a{font-weight:700;text-transform:uppercase;font-style:italic;color:var(--muted);text-decoration:none;padding:8px 12px}
-.nav a.active{color:var(--neon-home)}
-.ball{position:absolute;top:calc(100% + 6px);width:22px;height:22px;transform:translateX(0);transition:transform 420ms cubic-bezier(.2,.9,.2,1),opacity 220ms}
-.main{padding:8px;text-align:center}
-@media(min-width:720px){.container{padding:32px}}
+
+body {
+  margin: 0;
+  font-family: "League Gothic", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* NAVIGATION */
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  padding: 12px 0;
+}
+.nav a {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-style: italic;
+  position: relative;
+}
+.nav a.current {
+  color: var(--accent-orange);
+}
+
+/* TITLE */
+.title {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: clamp(100px, 12vw, 160px);
+  margin: 40px 0 10px;
+  text-align: center;
+  padding: 20px;
+  border: 2px solid;
+  border-image: linear-gradient(90deg, #ff007f, #00f2ff, #ffd400) 1;
+  border-radius: 8px;
+  box-shadow: inset 0 -4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* TAGLINE */
+.tagline {
+  font-size: clamp(26px, 5vw, 36px);
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent-orange);
+  text-align: center;
+}
 </style>
 </head>
+
 <body>
 <div class="container">
-  <header class="header">
-    <nav class="nav" id="nav">
-      <a href="index.html" data-key="home" class="active">Home</a>
-      <a href="predict.html" data-key="predict">Predict</a>
-      <a href="table.html" data-key="table">Table</a>
-      <a href="rules.html" data-key="rules">Rules</a>
-      <div class="ball" id="ball">⚽️</div>
-    </nav>
 
+  <nav class="nav">
+    <a href="index.html" class="current">Home</a>
+    <a href="predict.html">Predict</a>
+    <a href="table.html">Table</a>
+    <a href="rules.html" style="color: var(--accent-teal);">Rules</a>
+  </nav>
+
+  <header>
     <h1 class="title">LMS XII</h1>
-    <div class="tagline">LET'S BE HAVING YOU</div>
+    <div class="tagline">CHOOSE <s>LIFE</s> HARV</div>
   </header>
 
-  <main class="main">
-    <p style="font-weight:700">Welcome — tap Predict to make your weekly picks.</p>
-  </main>
 </div>
-
-<script>
-(function(){
-  const nav=document.getElementById('nav'), ball=document.getElementById('ball');
-  function place(){
-    const a=nav.querySelector('a.active')||nav.querySelector('a');
-    const r=a.getBoundingClientRect(), nr=nav.getBoundingClientRect();
-    ball.style.transform = `translateX(${r.left + r.width/2 - nr.left - ball.offsetWidth/2}px)`;
-    ball.style.opacity = 1;
-  }
-  place(); window.addEventListener('resize', place);
-  nav.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click', (e)=>{
-      nav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
-      e.currentTarget.classList.add('active');
-      place();
-    });
-  });
-})();
-</script>
 </body>
 </html>
