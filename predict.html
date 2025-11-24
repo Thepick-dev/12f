@@ -14,6 +14,9 @@
   --muted:#111;
   --accent-orange:#ff8a2b; /* Predict neon */
   --neon-pink: #ff007f;
+  --neon-blue: #00f2ff;
+  --neon-green: #00ff7f;
+  --neon-yellow: #ffd400;
   --gap-large:48px;
   --card-radius:12px;
   --player-area-gap:28px;
@@ -57,10 +60,9 @@ h1.title {
   box-shadow: inset 0 -4px 10px rgba(0,0,0,0.04);
 }
 
-/* Tagline - neon color */
+/* Tagline */
 .tagline { 
   font-size:clamp(20px,3.6vw,32px); 
-  text-transform:none; 
   font-weight:700; 
   color:var(--accent-orange); 
   text-align:center; 
@@ -84,12 +86,12 @@ main { width:100%; max-width:1120px; padding:0 12px; text-align:center; }
 .button { background:#000;color:#fff;border:none;cursor:pointer;padding:14px 18px; font-weight:900; text-transform:uppercase; font-size:18px; }
 .small { font-size:14px; padding:8px 10px; }
 
-/* Player nav - black buttons with white italic text */
+/* Player nav */
 .player-nav { display:flex; gap:8px; justify-content:center; margin:18px 0 28px; flex-wrap:wrap; }
 .player-nav button { background:#000; color:#fff; border: none; padding:12px 18px; border-radius:8px; font-weight:900; cursor:pointer; text-transform:uppercase; font-style:italic; }
 .player-nav button.active { outline:3px solid rgba(0,0,0,0.12); }
 
-/* Player area - boxed */
+/* Player area - each player gets unique neon border */
 .player-area {
   margin-bottom: var(--player-area-gap);
   padding:18px;
@@ -97,10 +99,10 @@ main { width:100%; max-width:1120px; padding:0 12px; text-align:center; }
   background: linear-gradient(180deg,#fff,#fff);
   box-shadow: 0 10px 30px rgba(0,0,0,0.06);
   text-align:left;
-  border:1px solid rgba(0,0,0,0.04);
+  border:3px solid; /* color set per player below */
 }
 
-/* Player header */
+/* Player headers */
 .player-title { display:flex; align-items:center; gap:12px; justify-content:space-between; }
 .player-name { font-size:28px; font-weight:900; text-transform:uppercase; letter-spacing:0.6px; }
 .player-total { font-size:18px; font-weight:900; text-transform:uppercase; color:#222; }
@@ -140,7 +142,6 @@ main { width:100%; max-width:1120px; padding:0 12px; text-align:center; }
 .points-grid th { font-weight:800; text-transform:uppercase; font-size:13px; }
 .points-grid td.team { text-align:left; font-weight:700; color:#000; }
 
-/* small utility */
 .kv { font-weight:700; }
 
 @media(max-width:980px){
@@ -171,7 +172,6 @@ main { width:100%; max-width:1120px; padding:0 12px; text-align:center; }
     <!-- TOP QUESTIONS -->
     <section class="top-questions" aria-labelledby="top-questions-label">
       <div id="top-questions-label" class="label" style="font-size:18px">PICK!</div>
-
       <div class="row" style="margin-top:8px;">
         <div class="col">
           <label class="label">YOUR NAME</label>
@@ -187,7 +187,6 @@ main { width:100%; max-width:1120px; padding:0 12px; text-align:center; }
             <option value="T-CITY">T-CITY</option>
           </select>
         </div>
-
         <div class="col">
           <label class="label">TEAM FOR THE WEEK</label>
           <select id="top-team" class="select" aria-label="Team for the week">
@@ -214,15 +213,12 @@ main { width:100%; max-width:1120px; padding:0 12px; text-align:center; }
             <option>Wolves</option>
           </select>
         </div>
-
         <div class="col">
           <label class="label">PLAYER</label>
           <input id="top-player" class="input" placeholder="ENTER PLAYER NAME (E.G. HAALAND)" aria-label="Player pick">
         </div>
       </div>
-
       <hr style="margin:16px 0; border:none; border-top:1px solid #eee;">
-
       <div style="display:flex; gap:10px;">
         <button class="button" id="submitPick">SUBMIT PICK</button>
       </div>
@@ -241,9 +237,7 @@ main { width:100%; max-width:1120px; padding:0 12px; text-align:center; }
     </div>
 
     <!-- PLAYER AREAS -->
-    <section id="players">
-      <!-- JS renders panels -->
-    </section>
+    <section id="players"></section>
 
   </main>
 </div>
@@ -256,7 +250,7 @@ const TEAM_DISPLAY = [
 ];
 
 const PLAYERS = ['BILLY','CROSBO','INGZ','KABZ','KIT','LOCKY','STOOBZ','T-CITY'];
-
+const TOTAL_WEEKS = 17;
 const FIXTURES = [
   {home:'Man Utd', away:'Man City', time:'12:30'},
   {home:'Chelsea', away:'Brentford', time:'15:00'},
@@ -270,12 +264,22 @@ const FIXTURES = [
   {home:'Brighton', away:'Bournemouth', time:'20:00'}
 ];
 
-const TOTAL_WEEKS = 17;
+const PLAYER_NEON = {
+  'BILLY':'#ff007f',
+  'CROSBO':'#00f2ff',
+  'INGZ':'#00ff7f',
+  'KABZ':'#ffd400',
+  'KIT':'#ff00ff',
+  'LOCKY':'#00ffff',
+  'STOOBZ':'#ff7700',
+  'T-CITY':'#77ff00'
+};
 
 function createPlayerPanel(playerId){
   const container = document.createElement('div');
   container.className = 'player-area';
   container.id = 'player-' + playerId;
+  container.style.borderColor = PLAYER_NEON[playerId];
 
   const header = document.createElement('div');
   header.className = 'player-title';
