@@ -1,60 +1,68 @@
-<!-- FILE: /index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LMS XII - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=League+Gothic&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --text:#000; --muted:#111;
+  --neon-home:#ff007f; --neon-predict:#ff8a2b; --neon-rules:#00c2b8; --neon-table:#9b00ff;
+  --title-size:clamp(96px,10vw,140px);
+  --tagline-size:clamp(20px,3.6vw,32px);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"League Gothic",Arial,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+.container{max-width:1120px;margin:0 auto;padding:18px}
+.header{display:flex;flex-direction:column;align-items:center}
+.title{font-family:"Bebas Neue",sans-serif;font-size:var(--title-size);margin:20px 0;padding:14px;border-radius:8px;border:2px solid;border-image: linear-gradient(90deg,#ff007f,#00f2ff,#ffd400) 1;}
+.tagline{font-size:var(--tagline-size);font-weight:700;margin-bottom:16px;color:var(--neon-home)}
+.nav{display:flex;gap:18px;justify-content:center;position:relative;padding:6px 0}
+.nav a{font-weight:700;text-transform:uppercase;font-style:italic;color:var(--muted);text-decoration:none;padding:8px 12px}
+.nav a.active{color:var(--neon-home)}
+.ball{position:absolute;top:calc(100% + 6px);width:22px;height:22px;transform:translateX(0);transition:transform 420ms cubic-bezier(.2,.9,.2,1),opacity 220ms}
+.main{padding:8px;text-align:center}
+@media(min-width:720px){.container{padding:32px}}
 </style>
 </head>
 <body>
 <div class="container">
-<header class="header">
-<nav class="nav" id="main-nav">
-<a href="index.html" data-key="home">Home</a>
-<a href="predict.html" data-key="predict">Predict</a>
-<a href="table.html" data-key="table">Table</a>
-<a href="rules.html" data-key="rules">Rules</a>
-<!-- football element -->
-<div class="ball" id="ball">⚽️</div>
-</nav>
-<h1 class="title">LMS XII</h1>
-<div class="tagline" id="page-tagline">LET'S BE HAVING YOU</div>
-</header>
+  <header class="header">
+    <nav class="nav" id="nav">
+      <a href="index.html" data-key="home" class="active">Home</a>
+      <a href="predict.html" data-key="predict">Predict</a>
+      <a href="table.html" data-key="table">Table</a>
+      <a href="rules.html" data-key="rules">Rules</a>
+      <div class="ball" id="ball">⚽️</div>
+    </nav>
 
+    <h1 class="title">LMS XII</h1>
+    <div class="tagline">LET'S BE HAVING YOU</div>
+  </header>
 
-<main class="main">
-<p style="text-align:center;font-weight:700">Welcome — tap Predict to make your weekly picks.</p>
-</main>
+  <main class="main">
+    <p style="font-weight:700">Welcome — tap Predict to make your weekly picks.</p>
+  </main>
 </div>
+
 <script>
-// small script to position the football on the active nav link
 (function(){
-const nav = document.getElementById('main-nav');
-const ball = document.getElementById('ball');
-function placeBallOn(active){
-if(!active) { ball.style.opacity=0; return }
-const r = active.getBoundingClientRect();
-const nr = nav.getBoundingClientRect();
-const x = r.left + r.width/2 - nr.left - ball.offsetWidth/2;
-ball.style.transform = `translateX(${x}px)`;
-ball.style.opacity=1;
-}
-// pick active anchor by pathname
-const anchors = nav.querySelectorAll('a');
-let active = Array.from(anchors).find(a=> location.pathname.endsWith(a.getAttribute('href')) || location.pathname.endsWith(a.getAttribute('href').replace('./','')) );
-if(!active) active = anchors[0];
-// set color based on data-key
-function setActive(a){ anchors.forEach(x=>x.classList.remove('active')); a.classList.add('active');
-const key=a.getAttribute('data-key');
-// set nav active color and tagline color
-if(key==='home'){ a.style.color='var(--neon-home)'; document.getElementById('page-tagline').style.color='var(--neon-home')}
-if(key==='predict'){ a.style.color='var(--neon-predict)'; document.getElementById('page-tagline').style.color='var(--neon-predict')}
-if(key==='rules'){ a.style.color='var(--neon-rules)'; document.getElementById('page-tagline').style.color='var(--neon-rules)'}
-if(key==='table'){ a.style.color='var(--neon-table)'; document.getElementById('page-tagline').style.color='var(--neon-table)'}
-placeBallOn(a);
-}
-setActive(active);
-// re-place on resize
-window.addEventListener('resize', ()=>placeBallOn(active));
-// also make nav links move the ball on click
-anchors.forEach(a=>a.addEventListener('click', (e)=>{
-try{ setActive(e.currentTarget); }catch(e){}
-}));
+  const nav=document.getElementById('nav'), ball=document.getElementById('ball');
+  function place(){
+    const a=nav.querySelector('a.active')||nav.querySelector('a');
+    const r=a.getBoundingClientRect(), nr=nav.getBoundingClientRect();
+    ball.style.transform = `translateX(${r.left + r.width/2 - nr.left - ball.offsetWidth/2}px)`;
+    ball.style.opacity = 1;
+  }
+  place(); window.addEventListener('resize', place);
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      nav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      place();
+    });
+  });
 })();
 </script>
 </body>
