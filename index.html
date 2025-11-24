@@ -12,29 +12,32 @@
   --bg: #ffffff;
   --text: #000000;
   --accent-orange: #ff8a2b;
-  --accent-teal: #00f2f2;
+  --accent-teal: #00c2b8;
+  --title-size: clamp(96px, 10vw, 140px);
+  --tagline-size: clamp(20px, 3.6vw, 32px);
 }
+
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: "League Gothic", Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
 .container {
-  max-width: 960px;
   width: 100%;
+  max-width: 1120px;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-/* NAVIGATION */
+/* NAV */
 .nav {
-  width: 100%;
   display: flex;
   justify-content: center;
   gap: 28px;
@@ -46,52 +49,48 @@ body {
   font-size: 22px;
   text-transform: uppercase;
   font-style: italic;
-  position: relative;
+  text-decoration: none;
 }
-.nav a.current {
-  color: var(--accent-orange);
-}
+.nav a.current { color: var(--accent-orange); }
 
 /* TITLE */
 .title {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
-  font-size: clamp(100px, 12vw, 160px);
+  font-size: var(--title-size);
   margin: 40px 0 10px;
   text-align: center;
   padding: 20px;
+  border-radius: 8px;
   border: 2px solid;
   border-image: linear-gradient(90deg, #ff007f, #00f2ff, #ffd400) 1;
-  border-radius: 8px;
-  box-shadow: inset 0 -4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 -4px 10px rgba(0,0,0,0.05);
 }
 
 /* TAGLINE */
 .tagline {
-  font-size: clamp(26px, 5vw, 36px);
-  text-transform: uppercase;
+  font-size: var(--tagline-size);
   font-weight: 700;
+  text-transform: none;
   color: var(--accent-orange);
   text-align: center;
+  margin-bottom: 8px;
 }
 </style>
 </head>
-
 <body>
-<div class="container">
+  <div class="container">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html" class="current">Home</a>
+      <a href="predict.html">Predict</a>
+      <a href="table.html">Table</a>
+      <a href="rules.html" style="color: var(--accent-teal);">Rules</a>
+    </nav>
 
-  <nav class="nav">
-    <a href="index.html" class="current">Home</a>
-    <a href="predict.html">Predict</a>
-    <a href="table.html">Table</a>
-    <a href="rules.html" style="color: var(--accent-teal);">Rules</a>
-  </nav>
-
-  <header>
-    <h1 class="title">LMS XII</h1>
-    <div class="tagline">CHOOSE <s>LIFE</s> HARV</div>
-  </header>
-
-</div>
+    <header>
+      <h1 class="title">LMS XII</h1>
+      <div class="tagline">CHOOSE <s style="color:inherit">LIFE</s> HARV</div>
+    </header>
+  </div>
 </body>
 </html>
