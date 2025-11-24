@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LMS XII - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=League+Gothic&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#ffffff;
+  --text:#000000;
+  --muted:#111;
+  --accent-pink:#ff007f;
+  --rules-teal:#00f2c6;
+  --title-size: clamp(96px, 10vw, 140px);
+  --tagline-size: clamp(20px, 3.6vw, 32px);
+  --gap-large:28px;
+}
+body { margin:0; font-family:"League Gothic", Arial, sans-serif; background:var(--bg); color:var(--text); display:flex; flex-direction:column; align-items:center; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+a, button { text-decoration:none; user-select:none; }
+.container { max-width:960px; width:100%; padding:18px; box-sizing:border-box; }
+.nav { width:100%; display:flex; justify-content:center; gap:20px; padding:12px 0; }
+.nav a { color:#000; font-weight:700; font-size:20px; text-transform:uppercase; font-style:italic; }
+.nav a.current { color:var(--accent-pink); }
+.nav a.rules { color:var(--text); }
+.nav a.rules.current { color:var(--rules-teal); }
+h1.title { font-family:"Bebas Neue", sans-serif; font-weight:400; font-size:var(--title-size); margin:28px 0 8px; text-align:center; padding:16px; border:2px solid; border-image: linear-gradient(90deg, #ff007f, #00f2ff, #ffd400) 1; border-radius:8px; box-shadow: inset 0 -4px 10px rgba(0,0,0,0.04); }
+.tagline { font-size:var(--tagline-size); text-transform:uppercase; font-weight:700; color:var(--accent-pink); text-align:center; margin-bottom:var(--gap-large); }
+main { width:100%; max-width:960px; padding:0 12px; text-align:center; }
+.footer { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px 0 40px; }
+.footer a { color:#000; font-weight:700; font-size:20px; text-transform:uppercase; font-family:"League Gothic", sans-serif; }
+.footer a:hover { color:var(--accent-pink); }
+@media(max-width:480px){ :root { --title-size: clamp(64px, 18vw, 96px); --tagline-size: clamp(18px,4.6vw,28px);} .nav { gap:12px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav">
+    <a href="index.html" class="current">Home</a>
+    <a href="predict.html">Predict</a>
+    <a href="table.html">Table</a>
+    <a href="rules.html" class="rules">Rules</a>
+  </nav>
+  <header>
+    <h1 class="title">LMS XII</h1>
+    <div class="tagline">LET'S BE HAVING YOU</div>
+  </header>
+  <main>
+    <!-- Homepage content unchanged. -->
+  </main>
+  <footer class="footer">
+    <a href="predict.html">Predict</a>
+    <a href="table.html">Table</a>
+    <a href="rules.html">Rules</a>
+  </footer>
+</div>
+</body>
+</html>
