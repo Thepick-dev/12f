@@ -1,0 +1,61 @@
+<!-- FILE: /index.html -->
+</style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+<nav class="nav" id="main-nav">
+<a href="index.html" data-key="home">Home</a>
+<a href="predict.html" data-key="predict">Predict</a>
+<a href="table.html" data-key="table">Table</a>
+<a href="rules.html" data-key="rules">Rules</a>
+<!-- football element -->
+<div class="ball" id="ball">⚽️</div>
+</nav>
+<h1 class="title">LMS XII</h1>
+<div class="tagline" id="page-tagline">LET'S BE HAVING YOU</div>
+</header>
+
+
+<main class="main">
+<p style="text-align:center;font-weight:700">Welcome — tap Predict to make your weekly picks.</p>
+</main>
+</div>
+<script>
+// small script to position the football on the active nav link
+(function(){
+const nav = document.getElementById('main-nav');
+const ball = document.getElementById('ball');
+function placeBallOn(active){
+if(!active) { ball.style.opacity=0; return }
+const r = active.getBoundingClientRect();
+const nr = nav.getBoundingClientRect();
+const x = r.left + r.width/2 - nr.left - ball.offsetWidth/2;
+ball.style.transform = `translateX(${x}px)`;
+ball.style.opacity=1;
+}
+// pick active anchor by pathname
+const anchors = nav.querySelectorAll('a');
+let active = Array.from(anchors).find(a=> location.pathname.endsWith(a.getAttribute('href')) || location.pathname.endsWith(a.getAttribute('href').replace('./','')) );
+if(!active) active = anchors[0];
+// set color based on data-key
+function setActive(a){ anchors.forEach(x=>x.classList.remove('active')); a.classList.add('active');
+const key=a.getAttribute('data-key');
+// set nav active color and tagline color
+if(key==='home'){ a.style.color='var(--neon-home)'; document.getElementById('page-tagline').style.color='var(--neon-home')}
+if(key==='predict'){ a.style.color='var(--neon-predict)'; document.getElementById('page-tagline').style.color='var(--neon-predict')}
+if(key==='rules'){ a.style.color='var(--neon-rules)'; document.getElementById('page-tagline').style.color='var(--neon-rules)'}
+if(key==='table'){ a.style.color='var(--neon-table)'; document.getElementById('page-tagline').style.color='var(--neon-table)'}
+placeBallOn(a);
+}
+setActive(active);
+// re-place on resize
+window.addEventListener('resize', ()=>placeBallOn(active));
+// also make nav links move the ball on click
+anchors.forEach(a=>a.addEventListener('click', (e)=>{
+try{ setActive(e.currentTarget); }catch(e){}
+}));
+})();
+</script>
+</body>
+</html>
