@@ -1,113 +1,85 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>LMS XII - Home</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=League+Gothic&display=swap" rel="stylesheet">
-
 <style>
-:root{
+:root {
   --bg:#ffffff;
   --text:#000000;
   --muted:#111;
   --accent-pink:#ff007f;
-  --rules-teal:#00f2c6;
-  --title-size: clamp(96px, 10vw, 140px);
-  --tagline-size: clamp(20px, 3.6vw, 32px);
-  --header-min-height: 300px; /* ensures header doesn't jump between pages */
-  --max-width:960px;
+  --gap-large:48px;
+  --gap-mid:28px;
 }
 
-*{box-sizing:border-box}
-body{
+body {
   margin:0;
   font-family:"League Gothic", Arial, sans-serif;
   background:var(--bg);
   color:var(--text);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
 
-.container{max-width:var(--max-width);width:100%;padding:18px;margin:0 auto}
+a { text-decoration:none; color:inherit; }
+.container { max-width:960px; width:100%; padding:20px; box-sizing:border-box; }
 
-/* Navigation - identical on every page */
-.nav{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:12px 0;
-}
-.nav a{
-  color:#000;
-  font-weight:700;
-  font-size:20px;
-  text-transform:uppercase;
-  font-style:italic;
-}
-.nav a.current{ color:var(--accent-pink); }
-.nav a.rules.current{ color:var(--rules-teal); }
+/* Header / Navigation */
+.nav { width:100%; display:flex; justify-content:center; gap:28px; padding:12px 0; }
+.nav a { font-weight:700; font-size:22px; text-transform:uppercase; font-style:italic; color:#000; }
+.nav a.current { color:var(--accent-pink); }
 
-/* Header block (UNIFORM) */
-.header{
-  min-height:var(--header-min-height);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  padding:6px 12px;
-}
-h1.title{
+/* Title */
+h1.title { 
   font-family:"Bebas Neue", sans-serif;
   font-weight:400;
-  font-size:var(--title-size);
-  margin:0;
-  padding:16px;
+  font-size:clamp(100px,12vw,160px);
+  margin:40px 0 10px;
+  text-align:center;
+  padding:20px;
   border:2px solid;
   border-image: linear-gradient(90deg, #ff007f, #00f2ff, #ffd400) 1;
   border-radius:8px;
   box-shadow: inset 0 -4px 10px rgba(0,0,0,0.04);
-  text-align:center;
 }
-.tagline{
-  font-size:var(--tagline-size);
+
+/* Tagline */
+.tagline {
+  font-size:clamp(26px,5vw,36px);
   text-transform:uppercase;
   font-weight:700;
   color:var(--accent-pink);
   text-align:center;
+  margin-bottom:var(--gap-large);
 }
 
 /* Main content */
-main{ padding:18px 12px; text-align:center; }
-
-/* remove footer navigation (as requested) */
-/* small responsive tweaks */
-@media(max-width:520px){
-  :root{ --title-size: clamp(64px, 18vw, 96px); --tagline-size: clamp(18px,4.6vw,28px); --header-min-height: 220px; }
-  .nav a{ font-size:17px; gap:12px; }
-}
+main { width:100%; max-width:960px; padding:0 12px; text-align:center; }
 </style>
 </head>
 <body>
-  <div class="container">
-    <nav class="nav" aria-label="Main">
-      <a href="index.html" class="current">Home</a>
-      <a href="predict.html">Predict</a>
-      <a href="table.html">Table</a>
-      <a href="rules.html" class="rules">Rules</a>
-    </nav>
+<div class="container">
+  <nav class="nav">
+    <a href="index.html" class="current">Home</a>
+    <a href="predict.html">Predict</a>
+    <a href="table.html">Table</a>
+    <a href="rules.html">Rules</a>
+  </nav>
 
-    <header class="header" role="banner">
-      <h1 class="title">LMS XII</h1>
-      <div class="tagline">LET'S BE HAVING YOU</div>
-    </header>
+  <header>
+    <h1 class="title">LMS XII</h1>
+    <div class="tagline">LET'S BE HAVING YOU</div>
+  </header>
 
-    <main>
-      <!-- Homepage content (unchanged) -->
-      <p style="font-weight:700">Welcome — homepage content goes here.</p>
-    </main>
-  </div>
+  <main>
+    <!-- Add homepage content here -->
+  </main>
+</div>
 </body>
 </html>
